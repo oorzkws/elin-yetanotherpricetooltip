@@ -21,8 +21,9 @@ public static class WriteNote_Patch {
             isShopping = true;
         }
         // Either of the above is true = we already have price info displayed
-        if (isShopping) return;
-        
+        if (isShopping)
+            return;
+
         // Space and money bag graphic
         n.Space(8);
         var subUIItem = n.AddExtra<UIItem>("costPrice");
@@ -31,6 +32,6 @@ public static class WriteNote_Patch {
         var buyPrice = GetPrice(__instance);
         var sellPrice = GetPrice(__instance, true);
         subUIItem.text1.SetText($"{Lang._currency(buyPrice)} ({Lang._currency(sellPrice)})", FontColor.Good);
-        
+
     }
 }
