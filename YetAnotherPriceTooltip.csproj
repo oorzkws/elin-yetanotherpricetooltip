@@ -1,8 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <Product>$(AssemblyName)</Product>
+        <Company>Mute</Company>
+        <BepInExPluginGuid>$(Company).$(AssemblyName)</BepInExPluginGuid>
         <Description>NoSquashOnLoad for Elin</Description>
-        <FileVersion>0.1.0</FileVersion>
+        <FileVersion>0.1.1</FileVersion>
         <Version>$(FileVersion)</Version>
         <PackageId>YetAnotherPriceTooltip</PackageId>
     </PropertyGroup>

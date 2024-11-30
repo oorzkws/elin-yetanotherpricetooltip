@@ -1,4 +1,6 @@
 ﻿#nullable disable
+using YetAnotherPriceTooltip;
+
 namespace YetAnotherPriceTooltip.Patches;
 
 [HarmonyPatch(typeof(Thing), "WriteNote")]
@@ -29,9 +31,10 @@ public static class WriteNote_Patch {
         var subUIItem = n.AddExtra<UIItem>("costPrice");
         subUIItem.image1.sprite = SpriteSheet.Get("icon_money");
         // Text
-        var buyPrice = GetPrice(__instance);
-        var sellPrice = GetPrice(__instance, true);
-        subUIItem.text1.SetText($"{Lang._currency(buyPrice)} ({Lang._currency(sellPrice)})", FontColor.Good);
-
+        var displayString = Lang._currency(GetPrice(__instance));
+        if (YetAnotherPriceTooltip.Config.TryGetEntry<bool>("Display", "IncludeSellPrice", out var displaySellPrice) && displaySellPrice.Value) {
+            displayString += $" ({Lang._currency(GetPrice(__instance, true))})";
+        }
+        subUIItem.text1.SetText(displayString, FontColor.Good);
     }
 }
